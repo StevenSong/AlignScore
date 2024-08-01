@@ -1,19 +1,16 @@
 import json
 import logging
+import os
 import random
 from typing import Optional, Sized
-import numpy as np
 
+import numpy as np
 import torch
-from pytorch_lightning import LightningDataModule
-from torch.utils.data import DataLoader
+from lightning import LightningDataModule
+from torch.utils.data import DataLoader, Dataset, Sampler
 from tqdm import tqdm
-from transformers import (
-    AutoConfig,
-    AutoTokenizer,
-)
-from torch.utils.data import Dataset, Sampler
-import os
+from transformers import AutoConfig, AutoTokenizer
+
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 class DSTDataSet(Dataset):

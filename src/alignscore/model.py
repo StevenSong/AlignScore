@@ -1,16 +1,25 @@
 import math
+from dataclasses import dataclass
 from typing import Optional, Tuple
-from transformers import AdamW, get_linear_schedule_with_warmup, AutoConfig
-from transformers import BertForPreTraining, BertModel, RobertaModel, AlbertModel, AlbertForMaskedLM, RobertaForMaskedLM
+
 import torch
 import torch.nn as nn
-import pytorch_lightning as pl
+from lightning import LightningModule
 from sklearn.metrics import f1_score
-from dataclasses import dataclass
+from transformers import (
+    AdamW,
+    AlbertForMaskedLM,
+    AlbertModel,
+    AutoConfig,
+    BertForPreTraining,
+    BertModel,
+    RobertaForMaskedLM,
+    RobertaModel,
+    get_linear_schedule_with_warmup,
+)
 
 
-
-class BERTAlignModel(pl.LightningModule):
+class BERTAlignModel(LightningModule):
     def __init__(self, model='bert-base-uncased', using_pretrained=True, *args, **kwargs) -> None:
         super().__init__()
         # Already defined in lightning: self.device
